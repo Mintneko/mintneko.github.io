@@ -1,0 +1,547 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>JAVA中API的使用 | Ahir's Blog</title><meta name="author" content="Ahir"><meta name="copyright" content="Ahir"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="API        Math类               【重点】        System类             【重点】        Object类             【重点】        Objects类        BigDecimal类         【重点】        包装类（Integer类）   【重点】        Arrays类"><meta property="og:type" content="article"><meta property="og:title" content="JAVA中API的使用"><meta property="og:url" content="https://mintneko.github.io/2021/10/13/Article5/index.html"><meta property="og:site_name" content="Ahir&#39;s Blog"><meta property="og:description" content="API        Math类               【重点】        System类             【重点】        Object类             【重点】        Objects类        BigDecimal类         【重点】        包装类（Integer类）   【重点】        Arrays类"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://s4.ax1x.com/2022/01/13/7lMBU1.jpg"><meta property="article:published_time" content="2021-10-13T04:01:28.000Z"><meta property="article:modified_time" content="2024-11-27T02:00:38.873Z"><meta property="article:author" content="Ahir"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://s4.ax1x.com/2022/01/13/7lMBU1.jpg"><link rel="shortcut icon" href="/img/favicon.ico"><link rel="canonical" href="https://mintneko.github.io/2021/10/13/Article5/"><link rel="preconnect" href="//cdn.jsdelivr.net"><link rel="preconnect" href="//busuanzi.ibruce.info"><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload='this.media="all"'><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload='this.media="all"'><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":200},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: true
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"作者: Ahir","link":"链接: ","source":"来源: Ahir's Blog","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#121212","position":"bottom-left"},
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE={title:"JAVA中API的使用",isPost:!0,isHome:!1,isHighlightShrink:!1,isToc:!1,postUpdate:"2024-11-27 10:00:38"}</script><noscript><style type="text/css">#nav{opacity:1}.justified-gallery img{opacity:1}#post-meta time,#recent-posts time{display:inline!important}</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if (GLOBAL_CONFIG_SITE.isHome && /iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    document.addEventListener('pjax:complete', detectApple)})(window)</script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" media="print" onload='this.media="screen"'><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-filter-gitcalendar/lib/gitcalendar.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/l-lin/font-awesome-animation/dist/font-awesome-animation.min.css" media="defer" onload='this.media="all"'><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-butterfly-tag-plugins-plus@latest/lib/tag_plugins.min.css" media="defer" onload='this.media="all"'><script async src="https://cdn.jsdelivr.net/npm/hexo-butterfly-tag-plugins-plus@latest/lib/carousel-touch.min.js"></script><meta name="generator" content="Hexo 5.4.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/index.png" onerror='onerror=null,src="/img/friend_404.gif"' alt="avatar"></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">27</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">4</div></a></div></div></div><hr><div class="menus_items"><div class="menus_item"><a class="site-page" href="//mintneko.github.io/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fa fa-heartbeat"></i><span> 清单</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image:url(https://s4.ax1x.com/2022/01/13/7lMBU1.jpg)"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Ahir's Blog</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="//mintneko.github.io/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fa fa-heartbeat"></i><span> 清单</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 照片</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">JAVA中API的使用</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-10-13T04:01:28.000Z" title="发表于 2021-10-13 12:01:28">2021-10-13</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-11-27T02:00:38.873Z" title="更新于 2024-11-27 10:00:38">2024-11-27</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">1.6k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>5分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" data-flag-title="JAVA中API的使用"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p>API<br>Math类 【重点】<br>System类 【重点】<br>Object类 【重点】<br>Objects类<br>BigDecimal类 【重点】<br>包装类（Integer类） 【重点】<br>Arrays类 【重点】</p><pre><code>数组的高级操作             【重点】
+    二分查找
+    冒泡排序
+    快速排序
+
+递归                      【重点】
+</code></pre><p>如何使用API文档<br>1、打开文档<br>2、点击索引选项卡，输入类名，最后回车，就能显示该类的详细描述信息<br>3、查看描述信息<br>（1）看包<br>在java.lang包下的类不需要导包<br>其余都需要导包<br>（2）类的描述信息<br>其中会描述类的信息，类的注意事项，使用方式，它的方法等….<br>（3）看构造方法 【<strong>*</strong>】<br>用于创建对象<br>（4）看成员方法 【<strong>*</strong>】<br>作用<br>名称<br>参数<br>返回值<br>注意事项<br>…</p><pre><code>步骤：
+    静态的成员方法（类名.进行调用）
+        学习成员方法
+
+    非静态的成员方法
+        1、学习构造方法
+        2、学习成员方法
+</code></pre><p>Math类 【重点】<br>工具类的特点：<br>1、所有的方法都是static修饰的<br>2、构造方法使用private修饰（私有化）</p><pre><code>成员方法
+    public static int abs(int a) 返回参数的绝对值
+    public static double ceil(double a)返回大于或等于参数的最小double值，等于一个整数
+    public static double floor(double a)返回小于或等于参数的最大double值，等于一个整数
+    public static int round(float a) 按照四舍五入返回最接近参数的int
+    public static int max(int a,int b) 返回两个int值中的较大值
+    public static int min(int a,int b) 返回两个int值中的较小值
+    public static double pow (double a,double b)返回a的b次幂的值
+    public static double random() 返回值为double的正值，[0.0,1.0)
+</code></pre><p>System类 【重点】<br>成员方法<br>static void exit(int status)<br>static long currentTimeMillis()<br>static void arraycopy(Object src, int srcPos, Object dest, int destPos, int length)</p><p>Object类 【重点】<br>是所有类的父类、基类、超类、根类或者祖先类。</p><pre><code> String toString() ：将一个对象转为字符串返回。
+    * 一个类中如果没有重写toString方法，会默认继承Object类中的toString方法
+      Object类中的toString方法转换的字符串的格式：全类名@地址值的十六进制（com.itheima.demo1.Student@3f3afe78）
+      但是得到的字符串是这种格式没有什么意义，我们希望得到的字符串中能反映对象中的内容，所以我们基本上
+      会对Object类中继承的toString方法进行重写，使用快捷键重写即可。
+
+
+ boolean equals(Object obj) ：比较两个对象是否相等
+    一个类中如果没有重写equals方法，会默认继承Object类中的equals方法
+    Object类中的equals方法比较的是两个对象的地址是否相等，底层使用是==号进行比较
+    但是equals比较地址的功能一般我们不会需要，如果要比较地址，我们就直接使用==即可，所以基本上我们都会
+    对equals方法进行重写，重写之后是比较两个对象中的内容是否相等，使用快捷键重写即可
+
+
+    面试题：==和equals的区别
+        ==是比较运算符，既可以比较基本类型的数据，也可以比较引用类型的数据
+        比较基本类型的数据，比较的是值是否相等
+        比较引用类型的数据，比较的是地址值是否相等
+
+        equals是一个方法，只能比较引用类型的数据，不能比较基本类型的数据
+        比较引用类型的数据，默认比较的是地址值，
+        但是一般都会重写equals方法，比较的就是对象中的内容是否相等
+        比如：String就重写了equals方法，比较的是两个字符串对象的内容是否相等
+</code></pre><p>BigDecimal类 【重点】<br>可以进行精确运算，对数据敏感的项目（银行 证券类）会使用到这个类<br>构造方法<br>BigDecimal(double val)<br>BigDecimal(String val) 【推荐】</p><pre><code>成员方法
+    public BigDecimal add(另一个BigDecimal对象) 加法
+    public BigDecimal subtract (另一个BigDecimal对象) 减法
+    public BigDecimal multiply (另一个BigDecimal对象) 乘法
+    public BigDecimal divide (另一个BigDecimal对象) 除法
+    public BigDecimal divide (另一个BigDecimal对象，精确几位，舍入模式)
+</code></pre><p>包装类（Integer类） 【重点】<br>什么是包装类<br>基本类型（4类8种）对应的引用类型<br>Java是面向对象的语言，将基本类型的数据也是封装成了对象，这样就更加的方便对这些数据进行操作。</p><pre><code>基本类型对应的包装类
+    基本类型        包装类类型
+    byte            Byte
+    short           Short
+    int             Integer
+    long            Long
+    float           Float
+    double          Double
+    char            Character
+    boolean         Boolean
+
+Integer类
+    自动拆装箱
+        JDK5.0的新特性
+        装箱：将基本类型的数据转为包装类类型
+        拆箱：将包装类类型的数据转为基本类型
+
+        JDK5.0之后装箱和拆箱都可以自动完成，称之为自动拆装箱
+        自动装箱底层原理：是在调用valueOf方法,
+            Integer i1 = 100;
+            相当于
+            Integer i1 = Integer.valueOf(100);
+        自动拆箱底层原理：是在调用intValue方法
+            int i2 = i1;
+            相当于
+            int i2 = i1.intValue();
+
+    int和String的互转
+        int转String
+            + &quot;&quot;
+
+        String转int
+            Integer.parseInt(&quot;10&quot;);
+
+
+
+    public class MyIntegerDemo6 &#123;
+        public static void main(String[] args) &#123;
+            Integer i1 = 100;// Integer.valueOf(100)
+            Integer i2 = 100;// Integer.valueOf(100)
+            System.out.println(i1 == i2);// ?           true
+            System.out.println(i1.equals(i2));// true
+
+            Integer i3 = new Integer(100);
+            Integer i4 = new Integer(100);
+            System.out.println(i3 == i4);// false
+            System.out.println(i3.equals(i4));// true
+
+            System.out.println(&quot;--------------&quot;);
+
+            Integer i5 = 200;// Integer.valueOf(200)
+            Integer i6 = 200;// Integer.valueOf(200)
+            System.out.println(i5 == i6);// ?               false
+            System.out.println(i5.equals(i6));// true
+
+            Integer i7 = new Integer(200);
+            Integer i8 = new Integer(200);
+            System.out.println(i7 == i8);// false
+            System.out.println(i7.equals(i8));// true
+        &#125;
+    &#125;
+</code></pre><p>数组的高级操作 【重点】<br>二分查找</p><pre><code>    冒泡排序
+    快速排序
+</code></pre><p>递归<br>就是方法调用自身的过程</p><pre><code>递归的分类
+    直接递归
+    a() &#123;
+        a();
+    &#125;
+
+
+    间接递归
+    a() &#123;
+        b();
+    &#125;
+
+    b() &#123;
+        a();
+    &#125;
+
+递归的步骤：
+    1、递归的出口 -- 递归要结束
+    2、递归的规则 -- 这个方法做什么
+
+ 递归的注意事项：
+    1、构造方法不能递归
+    2、递归要有出口，否则会内存溢出
+    Arrays类             【重点】
+    public static String toString(int[] a)    返回指定数组的内容的字符串表示形式
+    public static void sort(int[] a)      按照数字顺序排列指定的数组
+    public static int binarySearch(int[] a, int key) 利用二分查找返回指定元素的索引
+</code></pre></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">Ahir</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://mintneko.github.io/2021/10/13/Article5/">https://mintneko.github.io/2021/10/13/Article5/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://mintneko.github.io" target="_blank">Ahir's Blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="addthis_inline_share_toolbox"></div><script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=null" async></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2021/10/13/Article6/"><img class="prev-cover" src="https://s4.ax1x.com/2022/01/13/7lMBU1.jpg" onerror='onerror=null,src="/img/404.jpg"' alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">JAVA中时间日期类&amp;&amp;JAVA异常抛出</div></div></a></div><div class="next-post pull-right"><a href="/2021/10/13/Article4/"><img class="next-cover" src="https://s4.ax1x.com/2022/01/13/7lMBU1.jpg" onerror='onerror=null,src="/img/404.jpg"' alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">多态&amp;&amp;内部类&amp;&amp;匿名内部类&amp;&amp;Lambda表达式</div></div></a></div></nav><hr><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div><div id="comment-switch"><span class="first-comment">Gitalk</span><span class="switch-btn"></span><span class="second-comment">Disqusjs</span></div></div><div class="comment-wrap"><div><div id="gitalk-container"></div></div><div><div id="disqus_thread"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/index.png" onerror='this.onerror=null,this.src="/img/friend_404.gif"' alt="avatar"></div><div class="author-info__name">Ahir</div><div class="author-info__description">知识分享，日常记录</div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">27</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">4</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Mintneko"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/Mintneko" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:pokgoliu@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2024/11/27/opengauss/" title="opengauss 华为高斯数据库安装B-format 兼容mysql"><img src="https://s4.ax1x.com/2022/01/13/7lMBU1.jpg" onerror='this.onerror=null,this.src="/img/404.jpg"' alt="opengauss 华为高斯数据库安装B-format 兼容mysql"></a><div class="content"><a class="title" href="/2024/11/27/opengauss/" title="opengauss 华为高斯数据库安装B-format 兼容mysql">opengauss 华为高斯数据库安装B-format 兼容mysql</a><time datetime="2024-11-27T01:01:31.000Z" title="发表于 2024-11-27 09:01:31">2024-11-27</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/01/31/icmp-type-code/" title="ICMP类型字段(Type)以及代码字段(Code)含义汇总"><img src="https://s4.ax1x.com/2022/01/13/7lMBU1.jpg" onerror='this.onerror=null,this.src="/img/404.jpg"' alt="ICMP类型字段(Type)以及代码字段(Code)含义汇总"></a><div class="content"><a class="title" href="/2024/01/31/icmp-type-code/" title="ICMP类型字段(Type)以及代码字段(Code)含义汇总">ICMP类型字段(Type)以及代码字段(Code)含义汇总</a><time datetime="2024-01-31T02:32:54.000Z" title="发表于 2024-01-31 10:32:54">2024-01-31</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/01/31/vlan-mode/" title="VLAN操作模式"><img src="https://s4.ax1x.com/2022/01/13/7lMBU1.jpg" onerror='this.onerror=null,this.src="/img/404.jpg"' alt="VLAN操作模式"></a><div class="content"><a class="title" href="/2024/01/31/vlan-mode/" title="VLAN操作模式">VLAN操作模式</a><time datetime="2024-01-31T02:32:54.000Z" title="发表于 2024-01-31 10:32:54">2024-01-31</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/01/29/guangxian/" title="光纤跳线-接头类型"><img src="https://s4.ax1x.com/2022/01/13/7lMBU1.jpg" onerror='this.onerror=null,this.src="/img/404.jpg"' alt="光纤跳线-接头类型"></a><div class="content"><a class="title" href="/2024/01/29/guangxian/" title="光纤跳线-接头类型">光纤跳线-接头类型</a><time datetime="2024-01-29T07:01:28.000Z" title="发表于 2024-01-29 15:01:28">2024-01-29</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/01/31/tcp-ack-seq-syn/" title="TCP的三次握手各字段(ack,seq,ACK,SYN)"><img src="https://s4.ax1x.com/2022/01/13/7lMBU1.jpg" onerror='this.onerror=null,this.src="/img/404.jpg"' alt="TCP的三次握手各字段(ack,seq,ACK,SYN)"></a><div class="content"><a class="title" href="/2023/01/31/tcp-ack-seq-syn/" title="TCP的三次握手各字段(ack,seq,ACK,SYN)">TCP的三次握手各字段(ack,seq,ACK,SYN)</a><time datetime="2023-01-31T06:32:54.000Z" title="发表于 2023-01-31 14:32:54">2023-01-31</time></div></div></div></div></div></div></main><footer id="footer" style="background:linear-gradient(135deg,"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2024 By Ahir</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">Hi, welcome to my <a href="https://mintneko.github.io/">blog</a>!</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"></div></div></div><hr><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script src="/js/search/local-search.js"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',preloader.endLoading())</script><div class="js-pjax"><script>function addGitalkSource () {
+  const ele = document.createElement('link')
+  ele.rel = 'stylesheet'
+  ele.href= 'https://cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.css'
+  document.getElementsByTagName('head')[0].appendChild(ele)
+}
+
+function loadGitalk () {
+  function initGitalk () {
+    var gitalk = new Gitalk(Object.assign({
+      clientID: 'b44f1bb60b38c4c99558',
+      clientSecret: 'e630e9f42fb9c83e51c70cb4992bb8037fb7d659',
+      repo: 'gitalk-Ahir',
+      owner: 'Mintneko',
+      admin: ['Mintneko'],
+      id: '1861470cc3cde7af25dbe00a0c01df7e',
+      language: 'zh-CN',
+      perPage: 10,
+      distractionFreeMode: false,
+      pagerDirection: 'last',
+      createIssueManually: false,
+      updateCountCallback: commentCount
+    },null))
+
+    gitalk.render('gitalk-container')
+  }
+
+  if (typeof Gitalk === 'function') initGitalk()
+  else {
+    addGitalkSource()
+    getScript('https://cdn.jsdelivr.net/npm/gitalk@latest/dist/gitalk.min.js').then(initGitalk)
+  }
+}
+
+function commentCount(n){
+  let isCommentCount = document.querySelector('#post-meta .gitalk-comment-count')
+  if (isCommentCount) {
+    isCommentCount.innerHTML= n
+  }
+}
+
+if ('Gitalk' === 'Gitalk' || !true) {
+  if (true) btf.loadComment(document.getElementById('gitalk-container'), loadGitalk)
+  else loadGitalk()
+} else {
+  function loadOtherComment () {
+    loadGitalk()
+  }
+}</script><script>function loadDisqusjs () {
+  function addDisqusjsCSS () {
+    const ele = document.createElement('link')
+    ele.rel = 'stylesheet'
+    ele.href= 'https://cdn.jsdelivr.net/npm/disqusjs@1/dist/disqusjs.css'
+    document.getElementsByTagName('head')[0].appendChild(ele)
+  }
+
+  function initDisqusjs () {
+    window.DISQUS = null
+    new DisqusJS({
+      shortname: 'mintneko',
+      siteName: 'Mintneko',
+      identifier: '2021/10/13/Article5/',
+      url: 'https://mintneko.github.io/2021/10/13/Article5/',
+      title: 'JAVA中API的使用',
+      api: 'https://disqus.skk.moe/disqus/',
+      apikey: 'ScHvmOnnBlZz9HkCBgeT2BXuavhKz92kCTest2mOLXetC04GJUA4zUkrRdkwrbdr',
+      nocomment: '这里冷冷清清的，一条评论都没有# display when a blog post or an article has no comment attached',
+      admin: 'Mintneko',
+      adminLabel: ''
+    });
+  }
+
+  window.disqusReset = initDisqusjs
+
+  if (window.disqusJsLoad) initDisqusjs()
+  else {
+    addDisqusjsCSS()
+    getScript('https://cdn.jsdelivr.net/npm/disqusjs@1/dist/disqus.js').then(initDisqusjs)
+    window.disqusJsLoad = true
+  }
+}
+
+if ('Gitalk' === 'Disqusjs' || !true) {
+  if (true) btf.loadComment(document.getElementById('disqus_thread'), loadDisqusjs)
+  else loadDisqusjs()
+}
+else {
+  function loadOtherComment () {
+    loadDisqusjs()
+  }
+}</script></div><script>window.addEventListener('load', () => {
+  const changeContent = (content) => {
+    if (content === '') return content
+
+    content = content.replace(/<img.*?src="(.*?)"?[^\>]+>/ig, '[图片]') // replace image link
+    content = content.replace(/<a[^>]+?href=["']?([^"']+)["']?[^>]*>([^<]+)<\/a>/gi, '[链接]') // replace url
+    content = content.replace(/<pre><code>.*?<\/pre>/gi, '[代码]') // replace code
+    content = content.replace(/<[^>]+>/g,"") // remove html tag
+
+    if (content.length > 150) {
+      content = content.substring(0,150) + '...'
+    }
+    return content
+  }
+
+  const findTrueUrl = (array) => {
+    Promise.all(array.map(item =>
+      fetch(item.url).then(resp => resp.json()).then(data => {
+        const urlArray = data.body.match(/(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?/ig)
+        if (data.user.login === 'utterances-bot') {
+          return urlArray.pop()
+        } else {
+          return urlArray.shift()
+        }
+      })
+    )).then(res => {
+        array = array.map((i,index)=> {
+          return {
+            ...i,
+            url: res[index]
+          }
+        })
+
+        saveToLocal.set('github-newest-comments', JSON.stringify(array), 10/(60*24))
+        generateHtml(array)
+    });
+  }
+
+  const getComment = () => {
+    fetch('https://api.github.com/repos/Mintneko/gitalk-Ahir/issues/comments?sort=updated&direction=desc&per_page=6&page=1',{
+      "headers": {
+        Accept: 'application/vnd.github.v3.html+json'
+      }
+    })
+      .then(response => response.json())
+      .then(data => {
+        const githubArray = data.map(item => {
+          return {
+            'avatar': item.user.avatar_url,
+            'content': changeContent(item.body_html),
+            'nick': item.user.login,
+            'url': item.issue_url,
+            'date': item.updated_at,
+            'githubUrl': item.html_url
+          }
+        })
+        findTrueUrl(githubArray)
+      }).catch(e => {
+        const $dom = document.querySelector('#card-newest-comments .aside-list')
+        $dom.innerHTML= "无法获取评论，请确认相关配置是否正确"
+      })
+  }
+
+  const generateHtml = array => {
+    let result = ''
+
+    if (array.length) {
+      for (let i = 0; i < array.length; i++) {
+        result += '<div class=\'aside-list-item\'>'
+
+        if (true) {
+          const name = 'src'
+          result += `<a href='${array[i].url}' class='thumbnail'><img ${name}='${array[i].avatar}' alt='${array[i].nick}'></a>`
+        }
+
+        result += `<div class='content'>
+        <a class='comment' href='${array[i].url}'>${array[i].content}</a>
+        <div class='name'><span>${array[i].nick} / </span><time datetime="${array[i].date}">${btf.diffDate(array[i].date, true)}</time></div>
+        </div></div>`
+      }
+    } else {
+      result += '没有评论'
+    }
+
+    let $dom = document.querySelector('#card-newest-comments .aside-list')
+    $dom.innerHTML= result
+    window.lazyLoadInstance && window.lazyLoadInstance.update()
+    window.pjax && window.pjax.refresh($dom)
+  }
+
+  const newestCommentInit = () => {
+    if (document.querySelector('#card-newest-comments .aside-list')) {
+      const data = saveToLocal.get('github-newest-comments')
+      if (data) {
+        generateHtml(JSON.parse(data))
+      } else {
+        getComment()
+      }
+    }
+  }
+
+  newestCommentInit()
+  document.addEventListener('pjax:complete', newestCommentInit)
+})</script><div class="aplayer no-destroy" data-id="7081083097" data-server="netease" data-type="playlist" data-fixed="true" data-autoplay="true"></div>-<script defer src="https://cdn.jsdelivr.net/gh/Mintneko/live2d-widget/autoload.js"></script><canvas class="fireworks" mobile="false"></canvas><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/fireworks.min.js"></script><script defer id="fluttering_ribbon" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-fluttering-ribbon.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful=!0,POWERMODE.shake=!0,POWERMODE.mobile=!1,document.body.addEventListener("input",POWERMODE)</script><script src="//code.tidio.co/0xt5jrfh7ivepzholkluiu2bbzocztao.js" async></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload='this.media="all"'><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/gh/metowolf/MetingJS@1.2/dist/Meting.min.js"></script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>let pjaxSelectors = [
+  'title',
+  '#config-diff',
+  '#body-wrap',
+  '#rightside-config-hide',
+  '#rightside-config-show',
+  '.js-pjax'
+]
+
+if (false) {
+  pjaxSelectors.unshift('meta[property="og:image"]', 'meta[property="og:title"]', 'meta[property="og:url"]')
+}
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener scroll 
+  window.removeEventListener('scroll', window.tocScrollFn)
+  window.removeEventListener('scroll', scrollCollect)
+
+  typeof preloader === 'object' && preloader.initLoading()
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof chatBtnFn === 'function' && chatBtnFn()
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // Analytics
+  if (false) {
+    MtaH5.pgv()
+  }
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+
+  typeof preloader === 'object' && preloader.endLoading()
+})
+
+document.addEventListener('pjax:error', (e) => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><div class="js-pjax"><script async>for(var arr=document.getElementsByClassName("recent-post-item"),i=0;i<arr.length;i++)arr[i].classList.add("wow"),arr[i].classList.add("animate__zoomIn"),arr[i].setAttribute("data-wow-duration","700ms"),arr[i].setAttribute("data-wow-delay","100ms"),arr[i].setAttribute("data-wow-offset","100"),arr[i].setAttribute("data-wow-iteration","1")</script><script async>for(var arr=document.getElementsByClassName("card-widget"),i=0;i<arr.length;i++)arr[i].classList.add("wow"),arr[i].classList.add("animate__zoomIn"),arr[i].setAttribute("data-wow-duration",""),arr[i].setAttribute("data-wow-delay",""),arr[i].setAttribute("data-wow-offset",""),arr[i].setAttribute("data-wow-iteration","")</script></div><script defer src="https://cdn.jsdelivr.net/gh/graingert/wow@1.3.0/dist/wow.min.js"></script><script defer src="https://cdn.jsdelivr.net/npm/hexo-butterfly-wowjs/lib/wow_init.min.js"></script><script data-pjax src="https://cdn.jsdelivr.net/npm/hexo-filter-gitcalendar/lib/gitcalendar.js"></script><script data-pjax>function gitcalendar_injector_config(){document.getElementById("recent-posts").insertAdjacentHTML("afterbegin",'<div class="recent-post-item" style="width:100%;height:auto;padding:10px;"><style>#git_container{min-height: 280px}@media screen and (max-width:650px) {#git_container{min-height: 0px}}</style><div id="git_loading" style="width:10%;height:100%;margin:0 auto;display: block;"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 50 50" style="enable-background:new 0 0 50 50" xml:space="preserve"><path fill="#d0d0d0" d="M25.251,6.461c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615V6.461z" transform="rotate(275.098 25 25)"><animatetransform attributeType="xml" attributeName="transform" type="rotate" from="0 25 25" to="360 25 25" dur="0.6s" repeatCount="indefinite"></animatetransform></path></svg><style>#git_container{display: none;}</style></div><div id="git_container"></div></div>'),console.log("已挂载gitcalendar")}document.getElementById("recent-posts")&&"/"===location.pathname&&(gitcalendar_injector_config(),GitCalendarInit("https://calendar-api-mintneko.vercel.app/api?Mintneko",["#e4dfd7","#f9f4dc","#f7e8aa","#f7e8aa","#f8df72","#fcd217","#fcc515","#f28e16","#fb8b05","#d85916","#f43e06"],"Mintneko"))</script><script async src="//at.alicdn.com/t/font_2032782_8d5kxvn09md.js"></script></body></html>
